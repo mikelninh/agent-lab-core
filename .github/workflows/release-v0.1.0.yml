@@ -1,0 +1,44 @@
+name: Release v0.1.0
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'package.json'
+      - '*.mjs'
+      - 'examples/**'
+      - 'LICENSE'
+      - 'NOTICE'
+      - '.github/workflows/release-v0.1.0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    if: github.repository == 'mikelninh/agent-lab-core'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Verify release commit
+        run: npm test
+      - name: Build package archive
+        run: npm pack
+      - name: Create v0.1.0 release once
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ARCHIVE=$(ls mikelninh-agent-lab-core-0.1.0.tgz)
+          if gh release view v0.1.0 >/dev/null 2>&1; then
+            echo 'v0.1.0 already exists; leaving it unchanged.'
+          else
+            gh release create v0.1.0 "$ARCHIVE" \
+              --target "$GITHUB_SHA" \
+              --title 'Agent Lab Core v0.1.0' \
+              --notes 'Initial Apache-2.0 release: deterministic match execution, replay verification, conformance, paired counterfactuals, JSONL engine adapters, generic reporting, and JavaScript/Python reference integrations.'
+          fi
