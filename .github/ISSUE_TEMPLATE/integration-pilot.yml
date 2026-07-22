@@ -1,0 +1,61 @@
+name: Integration pilot application
+description: Apply to connect a game to Agent Lab Core without sharing proprietary source.
+title: "[Pilot] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for testing Agent Lab Core. Do not include secrets, production credentials, personal player data, or proprietary source code in this public issue.
+  - type: input
+    id: game_type
+    attributes:
+      label: Game type
+      description: For example card game, tactics, auto-battler, roguelike, or puzzle.
+    validations:
+      required: true
+  - type: input
+    id: engine
+    attributes:
+      label: Engine and language
+      description: For example Unity/C#, Godot/GDScript, Python, C++, or JavaScript.
+    validations:
+      required: true
+  - type: dropdown
+    id: simulation
+    attributes:
+      label: Discrete simulation available?
+      options:
+        - Yes — turn or action based
+        - Partly — a discrete decision layer exists
+        - Not yet
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Development question
+      description: State the concrete balance, exploit, fairness, or regression question you want to test.
+    validations:
+      required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: Current adapter status
+      description: Which environment methods already work? Share only non-sensitive technical details.
+  - type: input
+    id: time
+    attributes:
+      label: Integration time available
+      description: For example two hours, one day, or one week.
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Data and security boundary
+      options:
+        - label: I will not post credentials, personal data, production access, or proprietary source in this issue.
+          required: true
+        - label: I understand that a local black-box JSONL process is sufficient.
+          required: true
+        - label: I can share anonymised integration time and workflow feedback.
+          required: true

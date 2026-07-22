@@ -70,7 +70,19 @@ const result = await runEnvironmentConformance({
 
 ## External engines
 
-The versioned `agent-lab.jsonl.v1` protocol lets Unity, Godot, Unreal, Python, C++, or another engine expose the same contract over standard input/output. See `jsonl-protocol.mjs` and `examples/relic-race-server.mjs`.
+The versioned `agent-lab.jsonl.v1` protocol lets Unity, Godot, Unreal, Python, C++, or another engine expose the same contract over standard input/output. See `jsonl-protocol.mjs`, the JavaScript Relic Race example, and the standalone Python Treasure Duel integration.
+
+## Integration pilot
+
+Agent Lab Core is recruiting 3–5 small game teams for a focused integration pilot. The goal is to connect a black-box local game process, run reproducible synthetic matches, and answer one real development question without modifying the core.
+
+Start with:
+
+- `docs/INTEGRATION_PILOT.md`;
+- `examples/adapter-template.mjs`;
+- the **Integration pilot application** issue form.
+
+Do not share credentials, personal player data, production access, or proprietary source code. A local JSONL process is sufficient.
 
 ## Evidence boundary
 
