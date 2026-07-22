@@ -1,0 +1,43 @@
+{
+  "name": "@mikelninh/agent-lab-core",
+  "version": "0.1.0",
+  "description": "Deterministic synthetic-player runner, replay verification, conformance, counterfactuals, and engine-neutral adapters.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "files": [
+    "*.mjs",
+    "examples/",
+    "README.md",
+    "LICENSE",
+    "NOTICE",
+    "SECURITY.md",
+    "CONTRIBUTING.md",
+    "CODE_OF_CONDUCT.md"
+  ],
+  "exports": {
+    ".": "./index.mjs",
+    "./conformance": "./conformance.mjs",
+    "./jsonl": "./jsonl-protocol.mjs",
+    "./counterfactual": "./counterfactual.mjs",
+    "./reporting": "./reporting.mjs",
+    "./examples/relic-race": "./examples/relic-race.mjs"
+  },
+  "scripts": {
+    "test": "node examples/smoke.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "game-testing",
+    "synthetic-players",
+    "simulation",
+    "replay",
+    "game-ai",
+    "qa"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikelninh/agent-lab-core.git"
+  }
+}
