@@ -23,7 +23,7 @@
     "./examples/relic-race": "./examples/relic-race.mjs"
   },
   "scripts": {
-    "test": "node examples/smoke.mjs"
+    "test": "node examples/smoke.mjs && node examples/python-engine-smoke.mjs"
   },
   "engines": {
     "node": ">=20"
