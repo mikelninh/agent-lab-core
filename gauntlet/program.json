@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "system": "agent-lab-core",
+  "objective": "Evolve synthetic-player policies and experiment settings while preserving deterministic replay, legal actions and reproducible comparisons.",
+  "fitness": {
+    "primary": ["exploit_discovery_rate", "strategy_diversity", "counterfactual_signal", "replay_reproducibility"],
+    "secondary": ["matches_per_second", "variance", "compute_cost"],
+    "hard_gates": [
+      "100% legal-action enforcement",
+      "100% replay verification for accepted runs",
+      "same seed + same policy => same result",
+      "no claim that synthetic metrics prove human fun/retention"
+    ]
+  },
+  "mutable": [
+    "synthetic agent policy",
+    "persona weights",
+    "exploration schedule",
+    "match allocation",
+    "paired counterfactual design",
+    "reporting thresholds"
+  ],
+  "forbidden": [
+    "environment rules while evaluating an agent mutation",
+    "seed set after observing results",
+    "replay verifier",
+    "legal action contract"
+  ],
+  "starter_cases": [
+    {"id":"dominant-action","scenario":"One legal action is subtly overpowered.","expected":"population should discover and concentrate on exploit"},
+    {"id":"seed-replay","scenario":"Repeat identical seeded match.","expected":"byte-equivalent/exact replay outcome"},
+    {"id":"illegal-action-agent","scenario":"Candidate proposes illegal action.","expected":"framework rejects/enforces contract"},
+    {"id":"patch-counterfactual","scenario":"Compare pre/post patch using paired seeds.","expected":"report isolates patch effect with uncertainty"},
+    {"id":"persona-collapse","scenario":"Weighted personas converge to same policy.","expected":"diversity metric surfaces collapse"},
+    {"id":"false-fun-claim","scenario":"High synthetic balance score.","expected":"report must not infer human enjoyment/retention"}
+  ],
+  "acceptance": "Any determinism/legal-action/replay hard-gate failure => REVERT. Otherwise keep only mutations that improve exploit discovery or experimental signal on held-out environments without collapsing strategy diversity."
+}
