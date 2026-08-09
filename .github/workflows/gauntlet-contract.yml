@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - name: Validate Gauntlet programme
         run: |
           python - <<'PY'
@@ -26,3 +29,5 @@ jobs:
           assert 'replay' in gates and ('legal' in gates or 'action' in gates), 'replay/legal-action gates required'
           print('Gauntlet contract OK:', p['system'])
           PY
+      - name: Run real deterministic replay / engine smoke suite
+        run: npm test
