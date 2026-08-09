@@ -1,0 +1,28 @@
+name: Gauntlet Contract
+
+on:
+  pull_request:
+  push:
+    branches: [feat/gauntlet-adapter]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Gauntlet programme
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('gauntlet/program.json'))
+          required={'version','system','objective','fitness','mutable','forbidden','starter_cases','acceptance'}
+          missing=required-set(p)
+          assert not missing, f'missing keys: {sorted(missing)}'
+          assert p['fitness'].get('primary') and p['fitness'].get('hard_gates')
+          assert len(p['starter_cases']) >= 3
+          assert p['mutable'] and p['forbidden']
+          assert not set(p['mutable']) & set(p['forbidden'])
+          gates=' '.join(p['fitness']['hard_gates']).lower()
+          assert 'replay' in gates and ('legal' in gates or 'action' in gates), 'replay/legal-action gates required'
+          print('Gauntlet contract OK:', p['system'])
+          PY
