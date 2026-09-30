@@ -20,10 +20,11 @@
     "./jsonl": "./jsonl-protocol.mjs",
     "./counterfactual": "./counterfactual.mjs",
     "./reporting": "./reporting.mjs",
-    "./examples/relic-race": "./examples/relic-race.mjs"
+    "./examples/relic-race": "./examples/relic-race.mjs",
+    "./studio": "./studio.mjs"
   },
   "scripts": {
-    "test": "node examples/smoke.mjs && node examples/python-engine-smoke.mjs"
+    "test": "node examples/smoke.mjs && node examples/python-engine-smoke.mjs && node --test studio.test.mjs && node examples/studio-smoke.mjs"
   },
   "engines": {
     "node": ">=20"
